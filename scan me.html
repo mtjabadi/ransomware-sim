@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>⚠️ Your Device is Locked ⚠️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: red;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(black, darkred);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-transform: uppercase;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { color: red; }
+      25%, 75% { color: white; }
+    }
+
+    .timer {
+      font-size: 2em;
+      margin: 20px 0;
+      color: yellow;
+    }
+
+    .pay-btn {
+      background: red;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.5em;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    /* Hidden close button */
+    .close-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      color: black;
+      background: transparent;
+      font-size: 30px;
+      border: none;
+      cursor: pointer;
+      opacity: 0; /* Hidden by default */
+      transition: opacity 0.5s;
+    }
+
+    /* Show close button only when hovering top-right corner */
+    body:hover .close-btn {
+      opacity: 0.2;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      color: grey;
+      font-size: 0.9em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>⚠️ Your Phone is Locked! ⚠️</h1>
+    <p>Your data has been encrypted. To regain access, pay R500 within:</p>
+    <div class="timer" id="countdown">05:00</div>
+    <button class="pay-btn" onclick="fakePay()">Pay Now via SnapScan</button>
+  </div>
+
+  <button class="close-btn" onclick="revealTruth()">✖</button>
+
+  <div class="footer">
+    <p>This is a cybersecurity awareness simulation. No real hacking occurred.</p>
+  </div>
+
+  <script>
+    // Countdown timer
+    let time = 5 * 60; // 5 minutes in seconds
+    const countdownEl = document.getElementById("countdown");
+
+    function updateTimer() {
+      let minutes = Math.floor(time / 60);
+      let seconds = time % 60;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+      countdownEl.textContent = `${minutes}:${seconds}`;
+      time--;
+      if (time < 0) {
+        revealTruth();
+      }
+    }
+    setInterval(updateTimer, 1000);
+
+    // Fake payment
+    function fakePay() {
+      alert("This was just a simulation! Let's learn how to avoid ransomware...");
+      window.location.href = "awareness.html"; // redirect to your awareness page
+    }
+
+    // Reveal truth
+    function revealTruth() {
+      alert("✅ Relax! This is just a ransomware awareness demo. Your device is safe.");
+      window.location.href = "awareness.html";
+    }
+  </script>
+
+</body>
+</html>
